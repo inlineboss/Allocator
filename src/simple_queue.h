@@ -13,12 +13,12 @@ public:
 		Head(nullptr), Tail(nullptr), count_item(0)
 	{};
 	~SimpleQueue(){
-		while(size != 0){
+		while(count_item != 0){
 			auto dealloc_ptr = Head;
 			Head = Head->Prev;
 			allocator.destroy(dealloc_ptr);
 			allocator.deallocate(dealloc_ptr,1);
-			size--;
+			count_item--;
 		}
 	}
 

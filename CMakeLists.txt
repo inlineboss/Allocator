@@ -14,7 +14,7 @@ src/main.cpp
 src/smart_dynamic_allocator.h
 src/dynamic_allocator.h
 src/static_allocator.h
-src/smart_queue.h
+src/simple_queue.h
 )
 
 set_property(TARGET Allocator PROPERTY CXX_STANDARD 17)
@@ -23,6 +23,7 @@ set_target_properties(Allocator PROPERTIES
     CXX_STANDARD 17
     CXX_STANDARD_REQUIRED ON
 )
+
 target_include_directories(Allocator
     PRIVATE "${CMAKE_BINARY_DIR}" src/
 )
