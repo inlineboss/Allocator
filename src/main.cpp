@@ -1,17 +1,14 @@
-
-#include <smart_queue.h>
+#include <iostream>
+#include <type_traits>
+#include <map>
+#include <algorithm>
+#include <iterator>
 
 #include "smart_dynamic_allocator.h"
 #include "static_allocator.h"
 #include "dynamic_allocator.h"
 
-#include <iostream>
-#include <type_traits>
-
-#include <map>
-
-#include <algorithm>
-#include <iterator>
+#include "simple_queue.h"
 
 using smart_dynamic_map =
 		std::map<std::size_t, std::size_t,
@@ -26,11 +23,11 @@ using static_map =
 using dynamic_map =
 		std::map<std::size_t, std::size_t,
 		std::less<std::size_t>,
-		AllocatorDynamic<std::pair<const std::size_t, std::size_t>>>;
+		DynamicAllocator<std::pair<const std::size_t, std::size_t>>>;
 
-using smart_queue =
-		SmartQueue<std::size_t,
-		SmartDynamicAllocator<std::pair<const std::size_t, std::size_t>, 10>>;
+using simple_queue =
+		SimpleQueue<std::size_t,
+		SmartDynamicAllocator<std::size_t, 10>>;
 
 constexpr std::size_t factorial (std::size_t a){
 	return a ? a * factorial(a - 1 ) : 1;
@@ -50,6 +47,7 @@ auto make_pair_indx_factor = [i = 0] () mutable
    return ++i, std::make_pair(i,factorial(i));
 };
 
+#define MSG(X) std::cout << X << std::endl
 
 int main()
 {
@@ -78,19 +76,19 @@ int main()
 		std::cout << it << std::endl;
 	}
 
-	SmartQueue<int> smart_queue1;
+	SimpleQueue<int> simple_queue1;
 
 	for (int i = 1; i <= 10; i++){
-		smart_queue1.push(factorial(i));
+		simple_queue1.push(factorial(i));
 	}
 
-	smart_queue smart_queue2;
+	simple_queue queue;
 
 	for (int i = 1; i <= 10; i++){
-		smart_queue2.push(factorial(i));
+		queue.push(factorial(i));
 	}
 
-	for(auto it : smart_queue2){
+	for(auto it : queue){
 		std::cout << it << std::endl;
 	}
 	return 0;

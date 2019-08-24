@@ -2,9 +2,11 @@
 #define DYNAMIC_ALLOCATOR_H_
 
 #include <memory>
+#include <cstddef>
+#include <cstdlib>
 
 template<typename T>
-class AllocatorDynamic{
+class DynamicAllocator{
 public:
 	using value_type = T;
 	using pointer = T*;
@@ -15,15 +17,15 @@ public:
 	using difference_type = std::ptrdiff_t;
 
 	template<typename U>
-	AllocatorDynamic(const AllocatorDynamic<U>&)
+	DynamicAllocator(const DynamicAllocator<U>&)
 	{}
 
-	AllocatorDynamic() = default;
-	~AllocatorDynamic() = default;
+	DynamicAllocator() = default;
+	~DynamicAllocator() = default;
 
 	template <class U>
 	struct rebind{
-		using other = AllocatorDynamic<U>;
+		using other = DynamicAllocator<U>;
 	};
 
 	pointer allocate(size_type n, const_pointer hint = 0){

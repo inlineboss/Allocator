@@ -6,7 +6,7 @@ else()
     set(VERSION_BUILD 0)
 endif()
 
-project(Allocator VERSION 0.0.1$ENV{TRAVIS_BUILD_NUMBER})
+project(Allocator VERSION 0.0.${VERSION_BUILD})
 
 add_executable(
 Allocator

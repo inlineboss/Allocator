@@ -22,6 +22,10 @@ private:
 	using memory_ptr = void*;
 	const std::size_t size_memory_block = SIZE * sizeof(value_type);
 
+	template <std::size_t COUNT>
+	struct allocate_memory_block{
+		uint8_t block[COUNT];
+	};
 public:
 	memory_block ptr;
 	std::size_t offset;
@@ -45,10 +49,6 @@ public:
 		using other = StaticAllocator<U, SIZE>;
 	};
 
-	template <std::size_t COUNT>
-	struct allocate_memory_block{
-		uint8_t block[COUNT];
-	};
 	pointer allocate(size_type n, [[maybe_unused]] const_pointer hint = 0){
 
 		if(offset == 0){
@@ -66,7 +66,7 @@ public:
 		return static_cast <pointer>(mem_p);
 	};
 
-	void deallocate(pointer p, size_type n){
+	void deallocate(pointer, size_type){
 	}
 
 	template< class U, class... Args >
@@ -76,6 +76,7 @@ public:
 
 	template< class U >
 	void destroy( U* p ){
+		p->~U();
 	}
 };
 

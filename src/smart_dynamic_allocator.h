@@ -61,7 +61,7 @@ public:
 		return static_cast <pointer>(mem_p);
 	};
 
-	void deallocate(pointer, size_type){
+	void deallocate(pointer, size_type = 0){
 	}
 
 	template< class U, class... Args >
