@@ -13,7 +13,6 @@ Allocator
 src/main.cpp
 src/smart_dynamic_allocator.h
 src/dynamic_allocator.h
-src/static_allocator.h
 src/simple_queue.h
 )
 
